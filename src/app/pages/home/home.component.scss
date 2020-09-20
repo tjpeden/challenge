@@ -1,0 +1,13 @@
+@import "~sass/theme";
+
+:host {
+  display: grid;
+
+  grid-template-rows: 1fr;
+}
+
+mat-card {
+  margin: 10px;
+
+  background-color: mat-color($accent, 50);
+}
