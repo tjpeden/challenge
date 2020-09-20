@@ -11,3 +11,29 @@ body {
 
   font-family: Roboto, "Helvetica Neue", sans-serif;
 }
+
+.flex {
+  display: flex;
+
+  &.horizontal {
+    flex-direction: row;
+  }
+
+  &.vertical {
+    flex-direction: column;
+  }
+}
+
+@for $i from 1 through 12 {
+  .flex#{$i} {
+    flex: $i 1 auto;
+  }
+}
+
+.text-center {
+  text-align: center;
+}
+
+.text-right {
+  text-align: right;
+}
