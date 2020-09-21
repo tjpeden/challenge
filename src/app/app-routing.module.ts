@@ -9,7 +9,11 @@ const routes: Routes = [
     path: '',
     component: LayoutComponent,
     children: [
-      { path: '', pathMatch: 'full', component: HomeComponent },
+      {
+        path: '',
+        pathMatch: 'full',
+        component: HomeComponent,
+      },
     ],
   },
 ];

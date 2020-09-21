@@ -7,6 +7,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import { MatToolbarModule } from '@angular/material/toolbar';
 
+import { AuthenticationModule } from './authentication/authentication.module';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -31,6 +32,8 @@ import { HomeComponent } from './pages/home/home.component';
     MatToolbarModule,
 
     AppRoutingModule,
+
+    AuthenticationModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

@@ -1,0 +1,13 @@
+mat-card {
+  min-width: 300px;
+}
+
+form {
+  display: grid;
+
+  grid-template-rows: 1fr;
+}
+
+mat-form-field {
+  width: 100%;
+}
