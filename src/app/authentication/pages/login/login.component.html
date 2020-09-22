@@ -16,8 +16,9 @@
   </mat-card-content>
   <mat-card-actions>
     <div class="flex">
+      <button type="button" routerLink="/register" color="primary" mat-button>Register</button>
       <span class="flex1"></span>
-      <button type="button" [disabled]="form.invalid" color="primary" mat-flat-button (click)="login()">Login</button>
+      <button type="button" (click)="login()" [disabled]="form.invalid" color="primary" mat-flat-button>Login</button>
     </div>
   </mat-card-actions>
 </mat-card>

@@ -18,8 +18,8 @@ export class LoginComponent {
     builder: FormBuilder,
   ) {
     this.form = builder.group({
-      username: ['', Validators.required],
-      password: ['', Validators.required],
+      username: [null, Validators.required],
+      password: [null, Validators.required],
     })
   }
 

@@ -19,9 +19,9 @@ export class RegisterComponent {
   ) {
     // TODO: add validator for `password` & `confirm` match.
     this.form = builder.group({
-      username: ['', Validators.required],
-      password: ['', Validators.required],
-      confirm: ['', Validators.required],
+      username: [null, Validators.required],
+      password: [null, Validators.required],
+      confirm: [null, Validators.required],
     })
   }
 
