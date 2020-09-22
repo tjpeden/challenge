@@ -1,0 +1,47 @@
+@import "~sass/theme";
+
+:host {
+  display: grid;
+
+  grid:
+    "header header" auto
+    "sidebar content" 1fr
+    / 25% 1fr;
+
+  height: 100%;
+}
+
+.header {
+  grid-area: header;
+
+  margin: 10px;
+
+  background-color: mat-color($accent, 50);
+}
+
+.tree {
+  grid-area: sidebar;
+
+  margin: 5px;
+}
+
+.content {
+  grid-area: content;
+
+  display: grid;
+
+  grid-template-rows: auto 1fr;
+
+  margin: 5px 5px 10px 5px;
+}
+
+.submit {
+  justify-content: end;
+  align-items: center;
+}
+
+form {
+  display: grid;
+
+  grid-template-rows: 1fr;
+}

@@ -14,6 +14,10 @@ const routes: Routes = [
         pathMatch: 'full',
         component: HomeComponent,
       },
+      {
+        path: 'applications',
+        loadChildren: () => import('./application/application.module').then(m => m.ApplicationModule),
+      },
     ],
   },
 ];

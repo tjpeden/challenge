@@ -1,0 +1,50 @@
+<mat-card class="header">
+  <mat-card-content>
+    <div class="flex horizontal">
+      <section class="flex1">
+        <div>Applicant Name: TJ Peden</div>
+        <div>Application Type: {{ (application | async)?.applicationType }}</div>
+        <div>Form ID: {{ (application | async)?.formId }}</div>
+        <!-- I normally use a date pipe, but the example data is already formatted. -->
+        <div>Date: {{ (application | async)?.creationDate }}</div>
+      </section>
+      <section class="flex1 flex submit">
+        <button type="button" mat-flat-button color="primary">Submit</button>
+      </section>
+    </div>
+  </mat-card-content>
+</mat-card>
+<mat-tree class="tree" [dataSource]="dataSource" [treeControl]="treeControl">
+  <mat-tree-node *matTreeNodeDef="let node" matTreeNodePadding>
+    <button type="button" mat-icon-button disabled></button>
+    <button type="button" (click)="setSubForm(node.id)" mat-button>{{ node.name }}</button>
+  </mat-tree-node>
+  <mat-tree-node *matTreeNodeDef="let node; when: hasChild" matTreeNodePadding>
+    <button type="button" mat-icon-button matTreeNodeToggle>
+      <mat-icon>
+        {{ treeControl.isExpanded(node) ? 'expand_more' : 'chevron_right' }}
+      </mat-icon>
+    </button>
+    {{ node.name }}
+  </mat-tree-node>
+</mat-tree>
+<section class="content">
+  <mat-horizontal-stepper linear #stepper>
+    <ng-container *ngFor="let section of sections | async; let sectionIndex=index">
+      <mat-step [editable]="true" [stepControl]="(formGroups | async)[sectionIndex]">
+        <form [formGroup]="(formGroups | async)[sectionIndex]">
+          <ng-template matStepLabel>{{ section.title }}</ng-template>
+          <ng-container formArrayName="fields">
+            <ng-container *ngFor="let field of section.children; let fieldIndex=index">
+              <mat-form-field appearance="outline">
+                <mat-label>{{ field.title }}</mat-label>
+                <input type="text" [textMask]='{ mask: masks[field.format] }' [formControlName]="fieldIndex" matInput>
+                <mat-error *ngIf="getField(getName(section), fieldIndex).invalid">Error!!!</mat-error>
+              </mat-form-field>
+            </ng-container>
+          </ng-container>
+        </form>
+      </mat-step>
+    </ng-container>
+  </mat-horizontal-stepper>
+</section>
