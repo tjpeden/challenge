@@ -9,7 +9,7 @@
         <div>Date: {{ (application | async)?.creationDate }}</div>
       </section>
       <section class="flex1 flex submit">
-        <button type="button" mat-flat-button color="primary">Submit</button>
+        <button type="button" mat-flat-button color="primary" [disabled]="form.invalid" (click)="submit()">Submit</button>
       </section>
     </div>
   </mat-card-content>
@@ -29,20 +29,33 @@
   </mat-tree-node>
 </mat-tree>
 <section class="content">
-  <mat-horizontal-stepper linear #stepper>
-    <ng-container *ngFor="let section of sections | async; let sectionIndex=index">
-      <mat-step [editable]="true" [stepControl]="(formGroups | async)[sectionIndex]">
-        <form [formGroup]="(formGroups | async)[sectionIndex]">
+  <mat-horizontal-stepper *ngIf="form" linear #stepper>
+    <ng-container *ngFor="let section of sections | async; let sectionIndex=index; let first=first; let last=last">
+      <mat-step [editable]="true" [stepControl]="getForm(getName(section))">
+        <form [formGroup]="getForm(getName(section))">
           <ng-template matStepLabel>{{ section.title }}</ng-template>
-          <ng-container formArrayName="fields">
-            <ng-container *ngFor="let field of section.children; let fieldIndex=index">
-              <mat-form-field appearance="outline">
-                <mat-label>{{ field.title }}</mat-label>
-                <input type="text" [textMask]='{ mask: masks[field.format] }' [formControlName]="fieldIndex" matInput>
-                <mat-error *ngIf="getField(getName(section), fieldIndex).invalid">Error!!!</mat-error>
-              </mat-form-field>
-            </ng-container>
+          <ng-container *ngFor="let field of section.children">
+            <mat-form-field appearance="outline">
+              <mat-label>{{ field.title }}</mat-label>
+              <ng-container [ngSwitch]="field.fieldType">
+                <ng-container *ngSwitchCase="'textField'">
+                  <input type="text" [formControlName]="getName(field)" [textMask]='{ mask: masks[field.format] }' matInput>
+                </ng-container>
+                <ng-container *ngSwitchCase="'textArea'">
+                </ng-container>
+                <ng-container *ngSwitchCase="'select'">
+                </ng-container>
+                <!-- etc, etc, etc -->
+              </ng-container>
+              <mat-error *ngIf="getField(getName(section), getName(field)).errors?.required">This field is required</mat-error>
+            </mat-form-field>
           </ng-container>
+          <div class="flex">
+            <button *ngIf="!first" mat-button matStepperPrevious>Back</button>
+            <span class="flex1"></span>
+            <button *ngIf="!last" mat-button matStepperNext>Next</button>
+            <button *ngIf="last" color="primary" mat-flat-button>Save</button>
+          </div>
         </form>
       </mat-step>
     </ng-container>
