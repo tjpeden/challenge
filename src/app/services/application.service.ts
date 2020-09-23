@@ -93,10 +93,8 @@ const Applications: Application[] = [
                   {
                     "id": "1121",
                     "type": "field",
-                    "fieldType": "textField",
+                    "fieldType": "textArea",
                     "required": true,
-                    "format": "email",
-                    "masked": true,
                     "title": "Field 1121",
                   },
                   {

@@ -42,6 +42,7 @@
                   <input type="text" [formControlName]="getName(field)" [textMask]='{ mask: masks[field.format] }' matInput>
                 </ng-container>
                 <ng-container *ngSwitchCase="'textArea'">
+                  <textarea [formControlName]="getName(field)" matInput></textarea>
                 </ng-container>
                 <ng-container *ngSwitchCase="'select'">
                 </ng-container>

@@ -71,7 +71,6 @@ export class ApplicationInstanceComponent implements OnInit {
   public subFormId: Subject<string>
   public application: BehaviorSubject<Application>
   public sections: BehaviorSubject<ApplicationBits[]>
-  public formGroups: BehaviorSubject<FormGroup[]>
 
   public treeControl: FlatTreeControl<FlatNode>
   public treeFlattener: MatTreeFlattener<ApplicationBits, FlatNode>
@@ -91,7 +90,6 @@ export class ApplicationInstanceComponent implements OnInit {
     this.subFormId = new Subject()
     this.application = new BehaviorSubject(null)
     this.sections = new BehaviorSubject([])
-    this.formGroups = new BehaviorSubject([])
     this.treeControl = new FlatTreeControl(
       prop('level'),
       prop('expandable'),
