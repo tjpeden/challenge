@@ -1,14 +1,14 @@
-import { Component } from '@angular/core';
+import { Component } from '@angular/core'
 import {
   FormBuilder,
   FormGroup,
   Validators,
-} from '@angular/forms';
+} from '@angular/forms'
 
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
-  styleUrls: ['./register.component.scss']
+  styleUrls: ['./register.component.scss'],
 })
 export class RegisterComponent {
 
@@ -18,15 +18,19 @@ export class RegisterComponent {
     builder: FormBuilder,
   ) {
     // TODO: add validator for `password` & `confirm` match.
-    this.form = builder.group({
-      username: [null, Validators.required],
-      password: [null, Validators.required],
-      confirm: [null, Validators.required],
-    })
+    this.form = builder.group(
+      {
+        firstName: [null, Validators.required],
+        lastName: [null, Validators.required],
+        username: [null, Validators.required],
+        password: [null, Validators.required],
+        confirm: [null, Validators.required],
+      },
+    )
   }
 
-  public register() {
-    console.log("Registering!")
+  public register(): void {
+    console.log('Registering!')
   }
 
 }

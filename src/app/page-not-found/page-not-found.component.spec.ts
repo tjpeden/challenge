@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing'
 
-import { ApplicationListComponent } from './application-list.component'
+import { PageNotFoundComponent } from './page-not-found.component'
 
-describe('ApplicationListComponent', () => {
-  let component: ApplicationListComponent
-  let fixture: ComponentFixture<ApplicationListComponent>
+describe('PageNotFoundComponent', () => {
+  let component: PageNotFoundComponent
+  let fixture: ComponentFixture<PageNotFoundComponent>
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ ApplicationListComponent ],
+      declarations: [ PageNotFoundComponent ],
     })
     .compileComponents()
   })
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ApplicationListComponent)
+    fixture = TestBed.createComponent(PageNotFoundComponent)
     component = fixture.componentInstance
     fixture.detectChanges()
   })

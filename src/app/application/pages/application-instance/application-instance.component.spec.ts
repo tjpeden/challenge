@@ -1,25 +1,25 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed } from '@angular/core/testing'
 
-import { ApplicationInstanceComponent } from './application-instance.component';
+import { ApplicationInstanceComponent } from './application-instance.component'
 
 describe('ApplicationInstanceComponent', () => {
-  let component: ApplicationInstanceComponent;
-  let fixture: ComponentFixture<ApplicationInstanceComponent>;
+  let component: ApplicationInstanceComponent
+  let fixture: ComponentFixture<ApplicationInstanceComponent>
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ ApplicationInstanceComponent ]
+      declarations: [ ApplicationInstanceComponent ],
     })
-    .compileComponents();
-  });
+    .compileComponents()
+  })
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ApplicationInstanceComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
+    fixture = TestBed.createComponent(ApplicationInstanceComponent)
+    component = fixture.componentInstance
+    fixture.detectChanges()
+  })
 
   it('should create', () => {
-    expect(component).toBeTruthy();
-  });
-});
+    expect(component).toBeTruthy()
+  })
+})

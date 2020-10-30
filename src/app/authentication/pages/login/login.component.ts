@@ -1,14 +1,14 @@
-import { Component } from '@angular/core';
+import { Component } from '@angular/core'
 import {
   FormBuilder,
   FormGroup,
   Validators,
-} from '@angular/forms';
+} from '@angular/forms'
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss']
+  styleUrls: ['./login.component.scss'],
 })
 export class LoginComponent {
 
@@ -23,8 +23,8 @@ export class LoginComponent {
     })
   }
 
-  public login() {
-    console.log("Logging in!")
+  public login(): void {
+    console.log('Logging in!')
   }
 
 }

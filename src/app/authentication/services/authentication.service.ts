@@ -1,7 +1,7 @@
-import { Injectable } from '@angular/core';
+import { Injectable } from '@angular/core'
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class AuthenticationService {
 
@@ -14,10 +14,9 @@ export class AuthenticationService {
   public login(
     username: string,
     password: string,
-  ) {
-  }
+  ): void { }
 
-  public logout() {
+  public logout(): void {
     this.token = null
   }
 

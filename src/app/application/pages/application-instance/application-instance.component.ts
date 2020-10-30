@@ -1,22 +1,23 @@
 import {
   Component,
   OnInit,
-} from '@angular/core';
+} from '@angular/core'
 import {
+  AbstractControl,
   FormBuilder,
   FormGroup,
   ValidatorFn,
   Validators,
-} from '@angular/forms';
+} from '@angular/forms'
 import {
   ActivatedRoute,
-} from '@angular/router';
+} from '@angular/router'
 
-import { FlatTreeControl } from '@angular/cdk/tree';
+import { FlatTreeControl } from '@angular/cdk/tree'
 import {
   MatTreeFlattener,
   MatTreeFlatDataSource,
-} from '@angular/material/tree';
+} from '@angular/material/tree'
 
 import {
   untilDestroyed,
@@ -27,7 +28,7 @@ import {
   BehaviorSubject,
   Subject,
   combineLatest,
-} from 'rxjs';
+} from 'rxjs'
 import {
   map as rxMap,
   switchMap,
@@ -42,15 +43,15 @@ import {
   whereEq,
   chain,
   reduce,
-} from 'ramda';
+} from 'ramda'
 
-import emailMask from 'text-mask-addons/dist/emailMask';
+import emailMask from 'text-mask-addons/dist/emailMask'
 
 import {
   Application,
   ApplicationBits,
   ApplicationService,
-} from 'app/services/application.service';
+} from 'app/services/application.service'
 
 interface FlatNode {
   id: string
@@ -63,7 +64,7 @@ interface FlatNode {
 @Component({
   selector: 'app-application-instance',
   templateUrl: './application-instance.component.html',
-  styleUrls: ['./application-instance.component.scss']
+  styleUrls: ['./application-instance.component.scss'],
 })
 export class ApplicationInstanceComponent implements OnInit {
   public form: FormGroup
@@ -79,7 +80,7 @@ export class ApplicationInstanceComponent implements OnInit {
   public masks = {
     email: emailMask,
     ssn: [/\d/, /\d/, /\d/, '-', /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/],
-    phonenumber: ['(', /[1-9]/, /\d/, /\d/, ')', ' ', /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/]
+    phonenumber: ['(', /[1-9]/, /\d/, /\d/, ')', ' ', /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/],
   }
 
   public constructor(
@@ -126,7 +127,7 @@ export class ApplicationInstanceComponent implements OnInit {
         this.dataSource.data = data
 
         this.treeControl.expandAll()
-      }
+      },
     )
 
     tree$
@@ -142,19 +143,22 @@ export class ApplicationInstanceComponent implements OnInit {
     .subscribe(form => this.form = form)
 
     combineLatest(
-      tree$,
-      this.subFormId,
-      (tree, id) => {
-        const search = pipe(
-          chain(propOr([], 'children')),
-          find(whereEq({ id })),
-        )
-
-        return search(tree);
-      }
+      [
+        tree$,
+        this.subFormId,
+      ],
     )
     .pipe(
-      rxMap(prop('children')),
+      rxMap(
+        ([tree, id]) => {
+          const search = pipe<ApplicationBits[], ApplicationBits[], ApplicationBits>(
+            chain(propOr([], 'children')),
+            find(whereEq({ id })),
+          )
+
+          return search(tree).children
+        },
+      ),
     )
     .subscribe(this.sections)
 
@@ -165,7 +169,7 @@ export class ApplicationInstanceComponent implements OnInit {
           head, // first tree
           prop('children'),
           head, // first subform
-          prop('id')
+          prop('id'),
         ),
       ),
     )
@@ -176,7 +180,7 @@ export class ApplicationInstanceComponent implements OnInit {
     return node.expandable
   }
 
-  public setSubForm(id: string) {
+  public setSubForm(id: string): void {
     this.subFormId.next(id)
   }
 
@@ -191,11 +195,11 @@ export class ApplicationInstanceComponent implements OnInit {
     return this.form.get(section) as FormGroup
   }
 
-  public getField(section: string, field: string) {
+  public getField(section: string, field: string): AbstractControl {
     return this.form.get([section, field])
   }
 
-  public submit() {
+  public submit(): void {
     this.form.disable()
   }
 
